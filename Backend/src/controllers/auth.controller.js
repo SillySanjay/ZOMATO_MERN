@@ -6,12 +6,12 @@ const foodPartnerModel = require("../models/foodpartner.model")
 
 
 const registerUser = async (req, resp) => {
-    const { name, email, password} = req.body;
+    const { name, email, password } = req.body;
 
     const isUserAlreadyExists = await userModel.findOne({ email })
 
     if (isUserAlreadyExists) {
-        resp.status(400).json({
+        return resp.status(400).json({
             message: "user already exists"
         })
     }
@@ -24,19 +24,24 @@ const registerUser = async (req, resp) => {
         password: hashpassword,
     })
 
-const token = jwt.sign({
-    _id: user.id,
-}, process.env.JWT_SECRET)
-
-resp.cookie("token", token);
-resp.status(201).json({
-    message: "user created successfully",
-    user: {
+    const token = jwt.sign({
         _id: user.id,
-        name: user.name,
-        email: user.email,
-    }
-})
+    }, process.env.JWT_SECRET)
+
+    resp.cookie("token", token, {
+        httpOnly: true,
+        secure: false,      // false on localhost, true on HTTPS
+        sameSite: "lax",    // VERY IMPORTANT (strict will block cookies from Vite)
+        path: "/"           // cookie available for all routes
+    });
+    return resp.status(201).json({
+        message: "user created successfully",
+        user: {
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+        }
+    })
 }
 
 const loginUser = async (req, resp) => {
@@ -44,7 +49,7 @@ const loginUser = async (req, resp) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-        resp.status(400).json({
+        return resp.status(400).json({
             message: "invalid email and password"
         })
     }
@@ -52,7 +57,7 @@ const loginUser = async (req, resp) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-        resp.status(400).json({
+        return resp.status(400).json({
             message: "Invalid email or password"
         })
     }
@@ -60,8 +65,13 @@ const loginUser = async (req, resp) => {
     const token = jwt.sign({
         _id: user.id,
     }, process.env.JWT_SECRET);
-    resp.cookie("token", token);
-    resp.status(200).json({
+    resp.cookie("token", token, {
+        httpOnly: true,
+        secure: false,      // false on localhost, true on HTTPS
+        sameSite: "lax",    // VERY IMPORTANT (strict will block cookies from Vite)
+        path: "/"           // cookie available for all routes
+    });
+    return resp.status(200).json({
         message: "User LogdIn Successfully",
         user: {
             _id: user.id,
@@ -73,7 +83,7 @@ const loginUser = async (req, resp) => {
 
 const logoutUser = (req, resp) => {
     resp.clearCookie("token");
-    resp.status(200).json({
+    return resp.status(200).json({
         message: "User logedout successfully"
     })
 }
@@ -91,9 +101,9 @@ const registerFoodPartner = async (req, resp) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const foodPartner = await foodPartnerModel.create({
         name,
-        email, 
-        phone, 
-        contactName, 
+        email,
+        phone,
+        contactName,
         address,
         password: hashedPassword,
     })
@@ -101,8 +111,13 @@ const registerFoodPartner = async (req, resp) => {
     const token = jwt.sign({
         _id: foodPartner.id,
     }, process.env.JWT_SECRET)
-    resp.cookie("token", token);
-    resp.status(201).json({
+    resp.cookie("token", token, {
+        httpOnly: true,
+        secure: false,      // false on localhost, true on HTTPS
+        sameSite: "lax",    // VERY IMPORTANT (strict will block cookies from Vite)
+        path: "/"           // cookie available for all routes
+    });
+    return resp.status(201).json({
         message: "Food Partner registerd successfully",
         foodPartner: {
             _id: foodPartner.id,
@@ -120,7 +135,7 @@ const loginFoodPartner = async (req, resp) => {
     // console.log(email,password)
     const foodPartner = await foodPartnerModel.findOne({ email });
     if (!foodPartner) {
-        resp.status(400).json({
+        return resp.status(400).json({
             message: "invalid email and password"
         })
     }
@@ -137,16 +152,21 @@ const loginFoodPartner = async (req, resp) => {
     }, process.env.JWT_SECRET);
 
     // console.log(token)
-    resp.cookie("token", token)
+    resp.cookie("token", token, {
+        httpOnly: true,
+        secure: false,      // false on localhost, true on HTTPS
+        sameSite: "lax",    // VERY IMPORTANT (strict will block cookies from Vite)
+        path: "/"           // cookie available for all routes
+    })
 
-    resp.status(200).json({
+    return resp.status(200).json({
         message: "Food Partner Login Successfully"
     })
 }
 
 const logoutFoodPartner = (req, resp) => {
     resp.clearCookie("token");
-    resp.status(200).json({
+    return resp.status(200).json({
         message: "food partner loged out successfully"
     })
 }

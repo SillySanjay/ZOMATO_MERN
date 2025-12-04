@@ -29,7 +29,7 @@ const authUserMiddleware = async (req,resp,next) => {
     const token = req.cookies.token;
     if(!token){
         // console.log("error")
-        resp.status(400).json({
+        return resp.status(400).json({
             message: "please login first"
         })
     }

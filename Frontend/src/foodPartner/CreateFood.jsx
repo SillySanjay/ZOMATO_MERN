@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './create-food.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const CreateFoodItem = ({ onSubmit }) => {
   const navigate = useNavigate()

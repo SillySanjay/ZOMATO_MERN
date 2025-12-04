@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import "./profile.css"
 import axios from "axios";
 import { useState } from "react";

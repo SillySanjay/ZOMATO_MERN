@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import UserLogin from '../components/auth/UserLogin'
-import UserRegister from '../components/auth/UserRegister'
-import PartnerLogin from '../components/auth/PartnerLogin'
-import PartnerRegister from '../components/auth/PartnerRegister'
-import Home from "../general/Home"
-import CreateFood from "../foodPartner/CreateFood"
-import Profile from "../foodPartner/profile"
+import UserLogin from '../components/auth/UserLogin.jsx'
+import UserRegister from '../components/auth/UserRegister.jsx'
+import PartnerLogin from '../components/auth/PartnerLogin.jsx'
+import PartnerRegister from '../components/auth/PartnerRegister.jsx'
+import Home from "../general/Home.jsx"
+import CreateFood from "../foodPartner/CreateFood.jsx"
+import Profile from "../foodPartner/profile.jsx"
 
 const AppRoutes = () => {
   return (

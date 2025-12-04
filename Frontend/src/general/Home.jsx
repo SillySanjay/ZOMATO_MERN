@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import '../styles/home.css';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
