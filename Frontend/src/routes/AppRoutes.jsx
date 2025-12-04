@@ -5,7 +5,7 @@ import PartnerLogin from '../components/auth/PartnerLogin.jsx'
 import PartnerRegister from '../components/auth/PartnerRegister.jsx'
 import Home from "../general/Home.jsx"
 import CreateFood from "../foodPartner/CreateFood.jsx"
-import Profile from "../foodPartner/profile.jsx"
+import Profile from "../foodPartner/Profile.jsx"
 
 const AppRoutes = () => {
   return (
