@@ -12,7 +12,7 @@ const PartnerLogin = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const response = await axios.post("http://localhost:5000/api/auth/food-partner/login",{
+    const response = await axios.post("https://zomato-backend-uegj.onrender.com/api/auth/food-partner/login",{
       email,
       password
     },{withCredentials: true});

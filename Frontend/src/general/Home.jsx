@@ -33,7 +33,7 @@ const Home = () => {
   //   return () => observer.disconnect();
   // }, [isMuted, videos]);
   useEffect(() => {
-    axios.get("http://localhost:5000/api/food/", { withCredentials: true })
+    axios.get("https://zomato-backend-uegj.onrender.com/api/food/", { withCredentials: true })
       .then(response => {
         
         console.log(response.data.foodItems);

@@ -12,7 +12,7 @@ const navigate = useNavigate()
     const password = e.target.password.value;
     // console.log(fullName,email,password)
 
-    const response = await axios.post("http://localhost:5000/api/auth/user/register",{
+    const response = await axios.post("https://zomato-backend-uegj.onrender.com/api/auth/user/register",{
       name: fullName,
       email: email,
       password: password

@@ -12,7 +12,7 @@ const Profile = () => {
     const [videos,setVideos] = useState([]);
 
     useEffect(() => {
-      axios.get(`http://localhost:5000/api/food-partner/${id}`,{withCredentials:true})
+      axios.get(`https://zomato-backend-uegj.onrender.com/api/food-partner/${id}`,{withCredentials:true})
         .then((response)=> {
           setProfile(response.data.foodPartnerResponse);
           setVideos(response.data.foodPartnerResponse.foodItems);

@@ -18,7 +18,7 @@ const PartnerRegister = () => {
     const password = e.target.password.value;
     console.log(name,phone,contactName,address,email,password,)
 
-    const response = await axios.post("http://localhost:5000/api/auth/food-partner/register",{
+    const response = await axios.post("https://zomato-backend-uegj.onrender.com/api/auth/food-partner/register",{
       name: name,
       contactName: contactName,
       phone: phone,
