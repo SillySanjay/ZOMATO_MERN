@@ -11,7 +11,8 @@ const foodPartnerRoutes = require("../src/Routes/foodPartner.routes")
 
 // Middlewares
 app.use(cors({
-    origin:"https://zomato-mern-frontend.onrender.com/",
+    origin:"*",
+    methods:["GET","POST"],
     credentials: true,
 }))
 app.use(cookieParser())
